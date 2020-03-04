@@ -3,8 +3,6 @@
 exports[`Keypad should render correctly 1`] = `
 <div
   className="keypad-container"
-  numbers={Array []}
-  operators={Array []}
 >
   <div
     className="numbers-container"
@@ -16,7 +14,7 @@ exports[`Keypad should render correctly 1`] = `
     className="submit-container"
   >
     <Key
-      action={[MockFunction]}
+      onClick={[Function]}
       type="submit-key"
       value="="
     />

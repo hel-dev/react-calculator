@@ -8,8 +8,8 @@ const calculator = {
         console.log('call operation');
     },
 
-    setOperator: () => {
-        console.log('set operation');
+    setOperator: (operator) => {
+        console.log(`set operation: ${operator}`);
     },
 
     updateDisplay: (value) => {

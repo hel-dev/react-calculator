@@ -2,9 +2,8 @@
 
 exports[`Key should render correctly 1`] = `
 <div
-  className="key-container"
-  type=""
-  value=""
+  className="key-container "
+  onClick={[MockFunction]}
 >
   <p
     className="key-value"

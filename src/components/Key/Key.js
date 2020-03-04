@@ -5,13 +5,10 @@ import services from 'services'
 
 import './Key.css';
 
-const Key = ({ action, onClick, type, value }) => 
+const Key = ({ onClick, type, value }) => 
     <div 
-        className="key-container" 
-        type={type}
-        value={value} 
+        className={`key-container ${type}`}
         onClick={onClick}
-        // onClick={() => calculator[action](value)}
     >
         <p className="key-value">
             {value}
@@ -19,8 +16,9 @@ const Key = ({ action, onClick, type, value }) =>
     </div>;
 
 Key.propTypes = {
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
 }
 
 export default Key;

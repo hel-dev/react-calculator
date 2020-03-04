@@ -49,24 +49,26 @@ describe('mounted Calculator', () => {
     
     const spy = jest.spyOn(calculator, 'updateDisplay');
     expect(spy).toHaveBeenCalledTimes(0);
-    wrapper.find('[type="number-key"]').at(3).simulate('click');
+    wrapper.find('[type="number-key"]').at(1).simulate('click');
     expect(spy).toHaveBeenCalledTimes(1);
 
   });
 
-  // it('calls setOperator when an operator key is clicked', () => {
-  //   const spy = jest.spyOn(wrapper.instance(), 'setOperator');
-  //   wrapper.instance().forceUpdate();
-  //   expect(spy).toHaveBeenCalledTimes(0);
-  //   wrapper.find('.operator-key').first().simulate('click');
-  //   expect(spy).toHaveBeenCalledTimes(1);
-  // });
+  it('calls setOperator when an operator key is clicked', () => {
 
-  // it('calls callOperator when the submit key is clicked', () => {
-  //   const spy = jest.spyOn(wrapper.instance(), 'callOperator');
-  //   wrapper.instance().forceUpdate();
-  //   expect(spy).toHaveBeenCalledTimes(0);
-  //   wrapper.find('.submit-key').simulate('click');
-  //   expect(spy).toHaveBeenCalledTimes(1);
-  // });
+    const spy = jest.spyOn(calculator, 'setOperator');
+    expect(spy).toHaveBeenCalledTimes(0);
+    wrapper.find('[type="operator-key"]').at(1).simulate('click');
+    expect(spy).toHaveBeenCalledTimes(1);
+
+  });
+
+  it('calls callOperator when the submit key is clicked', () => {
+
+    const spy = jest.spyOn(calculator, 'callOperator');
+    expect(spy).toHaveBeenCalledTimes(0);
+    wrapper.find('.submit-key').simulate('click');
+    expect(spy).toHaveBeenCalledTimes(1);
+
+  });
 });

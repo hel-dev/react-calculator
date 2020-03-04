@@ -10,31 +10,31 @@
     cursor: pointer;
   }
   
-  [type="operator-key"] {
+  .operator-key {
     background-color: var(--action-key-color);
     width: 100%;
   }
   
-  [type="operator-key"]:hover {
+  .operator-key:hover {
     background-color: var(--action-key-color-hover);
   }
   
-  [type="number-key"] {
+  .number-key {
     background-color: var(--number-key-color);
     width: calc(100%/3);
   }
   
-  [type="number-key"]:hover {
+  .number-key:hover {
     background-color: var(--number-key-color-hover);
   }
   
-  [type="submit-key"] {
+  .submit-key {
     background-color: var(--submit-key-color);
     height: 100%;
     width: 100%;
   }
   
-  [type="submit-key"]:hover {
+  .submit-key:hover {
     background-color: var(--submit-key-color-hover);
   }
   

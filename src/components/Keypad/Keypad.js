@@ -10,7 +10,6 @@ const Keypad = ({ callOperator, numbers, operators }) => {
     const numberKeys = numbers.map(number => (
       <Key
         key={number}
-        action={'updateDisplay'}
         onClick={()=>calculator.updateDisplay(number)}
         type="number-key"
         value={number}
@@ -20,7 +19,7 @@ const Keypad = ({ callOperator, numbers, operators }) => {
     const operatorKeys = operators.map(operator => (
       <Key
         key={operator}
-        action={'setOperator'}
+        onClick={()=>calculator.setOperator(operator)}
         type="operator-key"
         value={operator}
       />)
@@ -29,8 +28,6 @@ const Keypad = ({ callOperator, numbers, operators }) => {
     return(
         <div 
             className="keypad-container" 
-            numbers={numbers} 
-            operators={operators} 
         >
             <div className="numbers-container">
                 {numberKeys}
@@ -42,9 +39,9 @@ const Keypad = ({ callOperator, numbers, operators }) => {
 
             <div className="submit-container">
                 <Key
-                    action={callOperator}
-                    type="submit-key"
+                    onClick={()=>calculator.callOperator()}
                     value="="
+                    type="submit-key"
                 />
             </div>
         </div>

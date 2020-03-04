@@ -8,7 +8,7 @@ describe('Key', () => {
   beforeEach(() => {
     wrapper = shallow(
       <Key
-        action={jest.fn()}
+        onClick={jest.fn()}
         type={''}
         value={''}
       />
