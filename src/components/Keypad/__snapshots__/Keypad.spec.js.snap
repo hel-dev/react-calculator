@@ -3,51 +3,22 @@
 exports[`Keypad should render correctly 1`] = `
 <div
   className="keypad-container"
+  numbers={Array []}
+  operators={Array []}
 >
   <div
     className="numbers-container"
-  >
-    <Key
-      handleKeyPress={[MockFunction]}
-      key="70"
-      keyAction={[MockFunction]}
-      keyType="number-key"
-      keyValue="7"
-    />
-    <Key
-      handleKeyPress={[MockFunction]}
-      key="131"
-      keyAction={[MockFunction]}
-      keyType="number-key"
-      keyValue="13"
-    />
-  </div>
+  />
   <div
     className="operators-container"
-  >
-    <Key
-      handleKeyPress={[MockFunction]}
-      key="+0"
-      keyAction={[MockFunction]}
-      keyType="operator-key"
-      keyValue="+"
-    />
-    <Key
-      handleKeyPress={[MockFunction]}
-      key="-1"
-      keyAction={[MockFunction]}
-      keyType="operator-key"
-      keyValue="-"
-    />
-  </div>
+  />
   <div
     className="submit-container"
   >
     <Key
-      handleKeyPress={[MockFunction]}
-      keyAction={[MockFunction]}
-      keyType="submit-key"
-      keyValue="="
+      action={[MockFunction]}
+      type="submit-key"
+      value="="
     />
   </div>
 </div>

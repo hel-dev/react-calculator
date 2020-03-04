@@ -4,16 +4,18 @@ import App from './App';
 import Calculator from '../Calculator/Calculator';
 
 describe('App', () => {
-  let wrapper;
-  beforeEach(() => (wrapper = shallow(<App />)));
 
-  it('should render correctly', () => expect(wrapper).toMatchSnapshot());
+    let wrapper;
 
-  it('should render a <div />', () => {
-    expect(wrapper.find('div').length).toEqual(1);
-  });
+    beforeEach(() => wrapper = shallow(<App />));
 
-  it('should render the Calculator Component', () => {
-    expect(wrapper.containsMatchingElement(<Calculator />)).toEqual(true);
-  });
+    it('should render correctly', () => expect(wrapper).toMatchSnapshot());
+
+    it('should render a <div />', () => {
+        expect(wrapper.find('div.app-container').length).toEqual(1);
+    });
+
+    it('should render the Calculator Component', () => {
+        expect(wrapper.containsMatchingElement(<Calculator />)).toEqual(true);
+    });
 });

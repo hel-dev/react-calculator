@@ -1,39 +1,43 @@
 {
-  "name": "tdd-react-calculator",
-  "author": "caleb pollman",
+  "name": "react-calculator",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "12.13.1",
-    "npm": "6.12.1"
-  },
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
-  },
-  "devDependencies": {
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "enzyme-to-json": "^3.4.3",
-    "prettier": "^1.19.1",
-    "react-scripts": "3.2.0",
-    "react-test-renderer": "^16.12.0"
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^10.0.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-scripts": "3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "react-test-renderer": "^16.13.0"
+  },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }

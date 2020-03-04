@@ -2,14 +2,12 @@
 
 exports[`Key should render correctly 1`] = `
 <div
-  className="key-container number-key"
-  onClick={[Function]}
-  onKeyPress={[Function]}
+  className="key-container"
+  type=""
+  value=""
 >
   <p
     className="key-value"
-  >
-    7
-  </p>
+  />
 </div>
 `;

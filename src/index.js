@@ -2,5 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App';
 import './index.css';
+import services from 'services';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+services.initialize();
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);

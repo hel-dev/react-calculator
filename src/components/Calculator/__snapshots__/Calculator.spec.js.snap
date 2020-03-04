@@ -8,8 +8,6 @@ exports[`Calculator should render correctly 1`] = `
     displayValue="0"
   />
   <Keypad
-    callOperator={[Function]}
-    handleKeyPress={[Function]}
     numbers={
       Array [
         "9",
@@ -34,8 +32,6 @@ exports[`Calculator should render correctly 1`] = `
         "+",
       ]
     }
-    setOperator={[Function]}
-    updateDisplay={[Function]}
   />
 </div>
 `;
