@@ -4,6 +4,8 @@ import './Calculator.css';
 import Display from '../Display/Display';
 import Keypad from '../Keypad/Keypad';
 
+import calculator from 'services/calculator';
+
 const Calculator = () => {
 //   state = {
 //     // value to be displayed in <Display />
@@ -18,15 +20,22 @@ const Calculator = () => {
 //     storedValue: '',
 //   }
 
-  const [displayValue, setDisplayValue] = useState('0');
-  const [operators, setOperators] = useState(['/', 'x', '-', '+']);
-  const [numbers, setNumbers] = useState(['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0','ce']);
+  const [displayValue, setDisplayValue] = useState(calculator.displayValue);
+  const operators = ['/', 'x', '-', '+'];
+  const numbers = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0','ce'];
   // const selectedOperator = [];
   // const storedValue = [];
-
+  
   useEffect(() => {
     // setDisplayValue('9')
-  }, []);
+
+    calculator.on('display-updated', 
+
+      value => setDisplayValue(value)
+
+    )
+
+  }, [displayValue]);
 
     return (
       <div className="calculator-container">
