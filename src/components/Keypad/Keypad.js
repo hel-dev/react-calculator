@@ -10,7 +10,7 @@ const Keypad = ({ callOperator, numbers, operators }) => {
     const numberKeys = numbers.map(number => (
       <Key
         key={number}
-        onClick={()=>calculator.updateDisplay(number)}
+        onClick={()=>calculator.setNumber(number)}
         type="number-key"
         value={number}
       />)

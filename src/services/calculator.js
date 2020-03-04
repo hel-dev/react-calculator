@@ -4,51 +4,103 @@ const calculator = {
 
     displayValue: '0',
 
-    selectedOperator: [],
+    selectedOperator: '',
 
-    storedValue: [],
+    storedValue: 0,
+
+    calculate: (value) => {
+
+        let result = 0
+
+        switch (calculator.selectedOperator) {
+
+            case "+":
+                result = calculator.storedValue+value;
+
+                break;
+
+            case "-":
+
+                result = calculator.storedValue-value;
+
+                break;
+
+            case "x":
+
+                result = calculator.storedValue*value;
+
+                break;
+
+            case "/":
+
+                result = calculator.storedValue/value;
+
+                break;
+        }
+
+        calculator.storedValue = result;
+
+        return result;
+    },
 
     callOperator: () => {
-        console.log('call operation');
+
+        if (calculator.storedValue) {
+            calculator.updateDisplay(calculator.calculate(parseInt(calculator.displayValue)))
+            calculator.displayValue = '0';
+        }
+
     },
 
     setOperator: (operator) => {
-        console.log(`set operation: ${operator}`);
+
+        if (calculator.storedValue) {
+            calculator.callOperator();
+        } else {
+            calculator.storedValue = parseInt(calculator.displayValue);
+        }
+
+        calculator.displayValue = '0';
+
+        calculator.selectedOperator = operator;
     },
 
-    updateDisplay: (value) => {
+    setNumber: (value) => {
 
-        console.log(`updateDisplay: ${value}`);
-
-        if (calculator.displayValue == '0' && value != '.') {
-            calculator.displayValue = ''
-        }
-
-        if (value == 'c') {
+        if (calculator.displayValue === '0' && value !== '.') {
             calculator.displayValue = '';
-            value = '0'
         }
 
-        if (value == 'ce') {
+        if (value === 'c') {
+            calculator.displayValue = '';
+            value = '0';
+        }
+
+        if (value === 'ce') {
             calculator.displayValue = calculator.displayValue.substring(0, calculator.displayValue.length - 1);
-            value = ''
+            value = '';
         }
 
-        if (value == '.' && /\./.test(calculator.displayValue)) {
-            value = ''
+        if (value === '.' && /\./.test(calculator.displayValue)) {
+            value = '';
         }
 
-        if (calculator.displayValue.replace(/[^0-9]/g,"").length == 7) {
-            value = ''
+        if (calculator.displayValue.replace(/[^0-9]/g,"").length === 7) {
+            value = '';
         }
 
         calculator.displayValue = calculator.displayValue + value;
 
         if (!calculator.displayValue.length) {
-            calculator.displayValue = '0'
+            calculator.displayValue = '0';
         }
 
-        calculator.emit('display-updated', calculator.displayValue)
+        calculator.updateDisplay(calculator.displayValue)
+    },
+
+    updateDisplay: (value) => {
+
+        calculator.emit('display-updated', String(value))
 
     }
 }

@@ -25,7 +25,7 @@ describe('Calculator', () => {
 
     const { displayValue } = displayComponent.find(Display).props();
 
-    const { numbers, operators, callOperator, setOperator, updateDisplay } = keypadComponent.find(Keypad).props();
+    const { numbers, operators, callOperator, setOperator, setNumber } = keypadComponent.find(Keypad).props();
 
     expect(wrapper.containsAllMatchingElements([
       <Display displayValue={displayValue} />,
@@ -34,7 +34,7 @@ describe('Calculator', () => {
         numbers={numbers}
         operators={operators}
         setOperator={setOperator}
-        updateDisplay={updateDisplay}
+        setNumber={setNumber}
       />
     ])).toEqual(true);
   });
@@ -46,9 +46,9 @@ describe('mounted Calculator', () => {
 
   beforeEach(() => wrapper = mount(<Calculator />));
   
-  it('calls updateDisplay when a number key is clicked', () => {
+  it('calls setNumber when a number key is clicked', () => {
     
-    const spy = jest.spyOn(calculator, 'updateDisplay');
+    const spy = jest.spyOn(calculator, 'setNumber');
     expect(spy).toHaveBeenCalledTimes(0);
     wrapper.find('.number-key').at(1).simulate('click');
     expect(spy).toHaveBeenCalledTimes(1);
@@ -75,7 +75,7 @@ describe('mounted Calculator', () => {
   
 });
 
-describe('updateDisplay', () => {
+describe('setNumber', () => {
 
   let wrapper;
 
@@ -84,8 +84,8 @@ describe('updateDisplay', () => {
   it('updates displayValue', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('c');
-      calculator.updateDisplay('5');
+      calculator.setNumber('c');
+      calculator.setNumber('5');
     })
     
     expect(wrapper.find('.display-container').text()).toEqual('5');
@@ -94,9 +94,9 @@ describe('updateDisplay', () => {
   it('concatenates displayValue', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('c');
-      calculator.updateDisplay('5');
-      calculator.updateDisplay('0');
+      calculator.setNumber('c');
+      calculator.setNumber('5');
+      calculator.setNumber('0');
     });
 
     expect(wrapper.find('.display-container').text()).toEqual('50');
@@ -105,14 +105,14 @@ describe('updateDisplay', () => {
   it('removes leading "0" from displayValue', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('c');
-      calculator.updateDisplay('0');
+      calculator.setNumber('c');
+      calculator.setNumber('0');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0');
 
     await act(async () => {
-      calculator.updateDisplay('5');
+      calculator.setNumber('5');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');
@@ -121,9 +121,9 @@ describe('updateDisplay', () => {
   it('prevents multiple leading "0"s from displayValue', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('c');
-      calculator.updateDisplay('0');
-      calculator.updateDisplay('0');
+      calculator.setNumber('c');
+      calculator.setNumber('0');
+      calculator.setNumber('0');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0');
@@ -132,9 +132,9 @@ describe('updateDisplay', () => {
   it('removes last char of displayValue', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('5');
-      calculator.updateDisplay('0');
-      calculator.updateDisplay('ce');
+      calculator.setNumber('5');
+      calculator.setNumber('0');
+      calculator.setNumber('ce');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');
@@ -143,9 +143,9 @@ describe('updateDisplay', () => {
   it('prevents multiple instances of "." in displayValue', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('c');
-      calculator.updateDisplay('.');
-      calculator.updateDisplay('.');
+      calculator.setNumber('c');
+      calculator.setNumber('.');
+      calculator.setNumber('.');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0.');
@@ -154,10 +154,87 @@ describe('updateDisplay', () => {
   it('will set displayValue to "0" if displayValue is equal to an empty string', async () => {
 
     await act(async () => {
-      calculator.updateDisplay('c');
+      calculator.setNumber('c');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0');
   });
 
+});
+
+describe('callOperator', () => {
+
+  let wrapper;
+
+  beforeEach(() => wrapper = mount(<Calculator />));
+
+  it('updates displayValue to the sum of storedValue and displayValue', async () => {
+
+    await act(async () => {
+      calculator.setNumber('c');
+      calculator.setNumber('3');
+      calculator.setOperator('+');
+      calculator.setNumber('2');
+      calculator.callOperator();
+    })
+
+    expect(wrapper.find('.display-container').text()).toEqual('5');
+
+  });
+
+  // it('updates displayValue to the difference of storedValue and displayValue', () => {
+  //   wrapper.setState({ storedValue: '3' });
+  //   wrapper.setState({ displayValue: '2' });
+  //   wrapper.setState({ selectedOperator: '-' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('1');
+  // });
+
+  // it('updates displayValue to the product of storedValue and displayValue', () => {
+  //   wrapper.setState({ storedValue: '3' });
+  //   wrapper.setState({ displayValue: '2' });
+  //   wrapper.setState({ selectedOperator: 'x' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('6');
+  // });
+
+  // it('updates displayValue to the quotient of storedValue and displayValue', () => {
+  //   wrapper.setState({ storedValue: '3' });
+  //   wrapper.setState({ displayValue: '2' });
+  //   wrapper.setState({ selectedOperator: '/' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('1.5');
+  // });
+
+  // it('updates displayValue to "0" if operation results in "NaN"', () => {
+  //   wrapper.setState({ storedValue: '3' });
+  //   wrapper.setState({ displayValue: 'string' });
+  //   wrapper.setState({ selectedOperator: '/' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('0');
+  // });
+
+  // it('updates displayValue to "0" if operation results in "Infinity"', () => {
+  //   wrapper.setState({ storedValue: '7' });
+  //   wrapper.setState({ displayValue: '0' });
+  //   wrapper.setState({ selectedOperator: '/' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('0');
+  // });
+
+  // it('updates displayValue to "0" if selectedOperator does not match cases', () => {
+  //   wrapper.setState({ storedValue: '7' });
+  //   wrapper.setState({ displayValue: '10' });
+  //   wrapper.setState({ selectedOperator: 'string' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('0');
+  // });
+
+  // it('updates displayValue to "0" if called with no value for storedValue or selectedOperator', () => {
+  //   wrapper.setState({ storedValue: '' });
+  //   wrapper.setState({ displayValue: '10' });
+  //   wrapper.setState({ selectedOperator: '' });
+  //   wrapper.instance().callOperator();
+  //   expect(wrapper.state('displayValue')).toEqual('0');
+  // });
 });
