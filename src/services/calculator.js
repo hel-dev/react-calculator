@@ -50,7 +50,9 @@ const calculator = {
 
     showTotal: () => {
 
-        calculator.updateDisplay(calculator.calculate(parseInt(calculator.displayValue)))
+        calculator.displayValue = calculator.calculate(parseInt(calculator.displayValue));
+
+        calculator.updateDisplay();
 
     },
 
@@ -89,10 +91,12 @@ const calculator = {
 
         calculator.displayValue = calculator.displayValue + value;
 
-        calculator.updateDisplay(calculator.displayValue)
+        calculator.updateDisplay()
     },
 
-    updateDisplay: (value) => {
+    updateDisplay: () => {
+
+        let value = String(calculator.displayValue);
 
         if (!value || !value.length) {
             value = '0';
@@ -105,8 +109,6 @@ const calculator = {
         if((value.replace(/[^0-9]/g,"").length == 6 && value.slice(-1) == '.')) {
             value = value.substring(0, 6);
         }
-
-        calculator.displayValue = value;
 
         calculator.emit('display-updated', String(value))
 
