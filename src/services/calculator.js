@@ -160,7 +160,7 @@ const calculator = {
 
             default:
 
-                if (displayValue === '0' && value !== '.') {
+                if (value !== '.' && displayValue === '0') {
                     displayValue = '';
                 }
 
