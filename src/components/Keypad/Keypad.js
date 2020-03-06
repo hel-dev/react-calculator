@@ -39,7 +39,7 @@ const Keypad = ({ callOperator, numbers, operators }) => {
 
             <div className="submit-container">
                 <Key
-                    onClick={()=>calculator.callOperator()}
+                    onClick={()=>calculator.setOperator("=")}
                     value="="
                     type="submit-key"
                 />

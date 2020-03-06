@@ -36,6 +36,12 @@ const calculator = {
                 result = calculator.storedValue/value;
 
                 break;
+
+            default:
+
+                result = calculator.storedValue;
+
+                break;
         }
 
         calculator.storedValue = result;
@@ -45,10 +51,7 @@ const calculator = {
 
     callOperator: () => {
 
-        if (calculator.storedValue) {
-            calculator.updateDisplay(calculator.calculate(parseInt(calculator.displayValue)))
-            calculator.displayValue = '0';
-        }
+        calculator.updateDisplay(calculator.calculate(parseInt(calculator.displayValue)))
 
     },
 
