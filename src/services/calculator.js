@@ -50,7 +50,7 @@ const calculator = {
             (operator, displayValue, storedValue) => {
 
                 if (!storedValue)  {
-                    calculator.storedValue = parseInt(displayValue);
+                    calculator.storedValue = parseFloat(displayValue);
                 }
         
                 calculator.displayValue = '0';
@@ -127,7 +127,7 @@ const calculator = {
     },
 
     showTotal: (value, storedValue, selectedOperator) => {
-        return calculator.updateDisplay(calculator.calculate(parseInt(value), storedValue, selectedOperator));
+        return calculator.updateDisplay(calculator.calculate(parseFloat(value), storedValue, selectedOperator));
     },
 
     setOperator: (operator, displayValue, storedValue, selectedOperator) => {
@@ -141,17 +141,31 @@ const calculator = {
 
     setNumber: (value, displayValue) => {
 
-        if (displayValue === '0' && value !== '.') {
-            displayValue = '';
-        }
+        switch (value) {
 
-        if (value === 'ce') {
-            displayValue = displayValue.substring(0, displayValue.length - 1);
-            value = '';
-        }
+            case "ce":
 
-        if (value === '.' && /\./.test(displayValue)) {
-            value = '';
+                displayValue = displayValue.substring(0, displayValue.length - 1);
+                value = '';
+
+                break;
+
+            case ".":
+
+                if (/\./.test(displayValue)) {
+                    value = '';
+                }
+
+                break;
+
+            default:
+
+                if (displayValue === '0' && value !== '.') {
+                    displayValue = '';
+                }
+
+                break;
+
         }
 
         calculator.updateDisplay(displayValue + value);
