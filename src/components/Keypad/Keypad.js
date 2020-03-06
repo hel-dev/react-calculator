@@ -19,7 +19,7 @@ const Keypad = ({ callOperator, numbers, operators }) => {
     const operatorKeys = operators.map(operator => (
       <Key
         key={operator}
-        onClick={()=>calculator.setOperator(operator, calculator.displayValue, calculator.storedValue)}
+        onClick={()=>calculator.setOperator(operator, calculator.displayValue, calculator.storedValue, calculator.selectedOperator)}
         type="operator-key"
         value={operator}
       />)
@@ -39,7 +39,7 @@ const Keypad = ({ callOperator, numbers, operators }) => {
 
             <div className="submit-container">
                 <Key
-                    onClick={()=>calculator.setOperator("=", calculator.displayValue, calculator.storedValue)}
+                    onClick={()=>calculator.setOperator("=", calculator.displayValue, calculator.storedValue, calculator.selectedOperator)}
                     value="="
                     type="submit-key"
                 />

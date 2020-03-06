@@ -174,9 +174,9 @@ describe('showTotal', () => {
     await act(async () => {
       calculator.setNumber('c');
       calculator.setNumber('3', calculator.displayValue);
-      calculator.setOperator('+', calculator.displayValue, calculator.storedValue);
+      calculator.setOperator('+', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
       calculator.setNumber('2', calculator.displayValue);
-      calculator.setOperator('=', calculator.displayValue, calculator.storedValue);
+      calculator.setOperator('=', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');

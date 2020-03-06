@@ -35,34 +35,42 @@ const calculator = {
             }
         )
 
+        calculator.on('calculation-made', 
+
+            value => {
+                calculator.storedValue = value;
+            }
+
+        )
+
     },
 
-    calculate: (value) => {
+    calculate: (value, storedValue, selectedOperator) => {
 
-        let result = calculator.storedValue;
+        let result = storedValue;
 
-        switch (calculator.selectedOperator) {
+        switch (selectedOperator) {
 
             case "+":
-                result = calculator.storedValue+value;
+                result = storedValue+value;
 
                 break;
 
             case "-":
 
-                result = calculator.storedValue-value;
+                result = storedValue-value;
 
                 break;
 
             case "x":
 
-                result = calculator.storedValue*value;
+                result = storedValue*value;
 
                 break;
 
             case "/":
 
-                result = calculator.storedValue/value;
+                result = storedValue/value;
 
                 break;
 
@@ -75,19 +83,19 @@ const calculator = {
             result = 9999999;
         }
 
-        calculator.storedValue = result;
+        calculator.emit('calculation-made', result)
 
         return result;
     },
 
-    showTotal: (value) => {
-        return calculator.updateDisplay(calculator.calculate(parseInt(value)));
+    showTotal: (value, storedValue, selectedOperator) => {
+        return calculator.updateDisplay(calculator.calculate(parseInt(value), storedValue, selectedOperator));
     },
 
-    setOperator: (operator, displayValue, storedValue) => {
+    setOperator: (operator, displayValue, storedValue, selectedOperator) => {
 
         if (storedValue) {
-            displayValue = calculator.showTotal(displayValue);
+            displayValue = calculator.showTotal(displayValue, storedValue, selectedOperator);
         } 
 
         calculator.emit('operator-set', operator, displayValue, storedValue)
