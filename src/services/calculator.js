@@ -6,11 +6,35 @@ const calculator = {
 
     numbers: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0','ce'],
 
-    displayValue: '0',
+    displayValue_: '0',
 
-    selectedOperator: '',
+    set displayValue (value) {
+        calculator.displayValue_ = value;
+    },
 
-    storedValue: 0,
+    get displayValue () {
+        return calculator.displayValue_;
+    },
+
+    selectedOperator_: '',
+
+    set selectedOperator (value) {
+        calculator.selectedOperator_ = value;
+    },
+
+    get selectedOperator () {
+        return calculator.selectedOperator_;
+    },
+
+    storedValue_: 0,
+
+    set storedValue (value) {
+        calculator.storedValue_ = value;
+    },
+
+    get storedValue () {
+        return calculator.storedValue_;
+    },
 
     initialize: () => {
 

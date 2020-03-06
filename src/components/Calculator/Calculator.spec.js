@@ -183,12 +183,17 @@ describe('showTotal', () => {
 
   });
 
-  // it('updates displayValue to the difference of storedValue and displayValue', () => {
-  //   wrapper.setState({ storedValue: '3' });
-  //   wrapper.setState({ displayValue: '2' });
-  //   wrapper.setState({ selectedOperator: '-' });
-  //   wrapper.instance().callOperator();
-  //   expect(wrapper.state('displayValue')).toEqual('1');
+  // it('updates displayValue to the difference of storedValue and displayValue', async () => {
+
+  //   await act(async () => {
+  //     calculator.setNumber('c');
+  //     calculator.storedValue = '3';
+  //     calculator.setNumber('2', calculator.displayValue);
+  //     calculator.setOperator('-', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
+  //     calculator.setOperator('=', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
+  //   })
+
+  //   expect(wrapper.find('.display-container').text()).toEqual('1');
   // });
 
   // it('updates displayValue to the product of storedValue and displayValue', () => {
