@@ -64,12 +64,12 @@ describe('mounted Calculator', () => {
 
   });
 
-  it('calls showTotal when the submit key is clicked', () => {
+  it('calls setOperator when the submit key is clicked', () => {
 
-    const spy = jest.spyOn(calculator, 'showTotal');
-    expect(spy).toHaveBeenCalledTimes(0);
-    wrapper.find('.submit-key').simulate('click');
+    const spy = jest.spyOn(calculator, 'setOperator');
     expect(spy).toHaveBeenCalledTimes(1);
+    wrapper.find('.submit-key').simulate('click');
+    expect(spy).toHaveBeenCalledTimes(2);
 
   });
   
@@ -174,9 +174,9 @@ describe('showTotal', () => {
     await act(async () => {
       calculator.setNumber('c');
       calculator.setNumber('3', calculator.displayValue);
-      calculator.setOperator('+', calculator.displayValue);
+      calculator.setOperator('+', calculator.displayValue, calculator.storedValue);
       calculator.setNumber('2', calculator.displayValue);
-      calculator.setOperator('=', calculator.displayValue);
+      calculator.setOperator('=', calculator.displayValue, calculator.storedValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');

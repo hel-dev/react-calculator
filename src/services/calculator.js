@@ -21,7 +21,20 @@ const calculator = {
             }
 
         )
+
+        calculator.on('operator-set',
+            (operator, displayValue, storedValue) => {
+
+                if (!storedValue)  {
+                    calculator.storedValue = parseInt(displayValue);
+                }
         
+                calculator.displayValue = '0';
+        
+                calculator.selectedOperator = operator;
+            }
+        )
+
     },
 
     calculate: (value) => {
@@ -71,17 +84,13 @@ const calculator = {
         return calculator.updateDisplay(calculator.calculate(parseInt(value)));
     },
 
-    setOperator: (operator) => {
-        
-        if (calculator.storedValue) {
-            calculator.displayValue = calculator.showTotal(calculator.displayValue);
-        } else {
-            calculator.storedValue = parseInt(calculator.displayValue);
-        }
+    setOperator: (operator, displayValue, storedValue) => {
 
-        calculator.displayValue = '0';
+        if (storedValue) {
+            displayValue = calculator.showTotal(displayValue);
+        } 
 
-        calculator.selectedOperator = operator;
+        calculator.emit('operator-set', operator, displayValue, storedValue)
     },
 
     setNumber: (value, displayValue) => {
