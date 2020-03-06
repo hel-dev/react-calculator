@@ -84,7 +84,7 @@ describe('setNumber', () => {
   it('updates displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('5', calculator.displayValue);
     })
     
@@ -94,7 +94,7 @@ describe('setNumber', () => {
   it('concatenates displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('5', calculator.displayValue);
       calculator.setNumber('0', calculator.displayValue);
     });
@@ -105,7 +105,7 @@ describe('setNumber', () => {
   it('removes leading "0" from displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('0', calculator.displayValue);
     })
 
@@ -121,7 +121,7 @@ describe('setNumber', () => {
   it('prevents multiple leading "0"s from displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('0', calculator.displayValue);
       calculator.setNumber('0', calculator.displayValue);
     })
@@ -132,7 +132,7 @@ describe('setNumber', () => {
   it('removes last char of displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('5', calculator.displayValue);
       calculator.setNumber('0', calculator.displayValue);
       calculator.setNumber('ce', calculator.displayValue);
@@ -144,7 +144,7 @@ describe('setNumber', () => {
   it('prevents multiple instances of "." in displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('.', calculator.displayValue);
       calculator.setNumber('.', calculator.displayValue);
     })
@@ -155,7 +155,8 @@ describe('setNumber', () => {
   it('will set displayValue to "0" if displayValue is equal to an empty string', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
+      calculator.updateDisplay('');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0');
@@ -172,7 +173,7 @@ describe('showTotal', () => {
   it('updates displayValue to the sum of storedValue and displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('c');
+      calculator.clear();
       calculator.setNumber('3', calculator.displayValue);
       calculator.setOperator('+', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
       calculator.setNumber('2', calculator.displayValue);
@@ -183,18 +184,19 @@ describe('showTotal', () => {
 
   });
 
-  // it('updates displayValue to the difference of storedValue and displayValue', async () => {
+  it('updates displayValue to the difference of storedValue and displayValue', async () => {
 
-  //   await act(async () => {
-  //     calculator.setNumber('c');
-  //     calculator.storedValue = '3';
-  //     calculator.setNumber('2', calculator.displayValue);
-  //     calculator.setOperator('-', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
-  //     calculator.setOperator('=', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
-  //   })
+    await act(async () => {
+      calculator.clear();
+      calculator.setNumber('3', calculator.displayValue);
+      calculator.setOperator('-', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
+      calculator.setNumber('2', calculator.displayValue);
+      calculator.setOperator('=', calculator.displayValue, calculator.storedValue, calculator.selectedOperator);
+    })
 
-  //   expect(wrapper.find('.display-container').text()).toEqual('1');
-  // });
+    expect(wrapper.find('.display-container').text()).toEqual('1');
+
+  });
 
   // it('updates displayValue to the product of storedValue and displayValue', () => {
   //   wrapper.setState({ storedValue: '3' });

@@ -67,6 +67,20 @@ const calculator = {
 
         )
 
+        calculator.on('calculator-clear', 
+
+            () => {
+                calculator.clear();
+            }
+
+        )
+
+    },
+
+    clear: () => {
+        calculator.displayValue = '0';
+        calculator.value = '0';
+        calculator.storedValue = 0;
     },
 
     calculate: (value, storedValue, selectedOperator) => {
@@ -129,11 +143,6 @@ const calculator = {
 
         if (displayValue === '0' && value !== '.') {
             displayValue = '';
-        }
-
-        if (value === 'c') {
-            displayValue = '';
-            value = '0';
         }
 
         if (value === 'ce') {
