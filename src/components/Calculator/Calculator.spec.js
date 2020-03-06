@@ -172,7 +172,7 @@ describe('showTotal', () => {
       calculator.setNumber('3');
       calculator.setOperator('+');
       calculator.setNumber('2');
-      calculator.showTotal();
+      calculator.setOperator('=');
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');

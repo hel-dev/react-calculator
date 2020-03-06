@@ -55,18 +55,14 @@ const calculator = {
         return result;
     },
 
-    showTotal: () => {
-
-        calculator.displayValue = calculator.calculate(parseInt(calculator.displayValue));
-
-        calculator.updateDisplay();
-
+    showTotal: (value) => {
+        return calculator.updateDisplay(calculator.calculate(parseInt(value)));
     },
 
     setOperator: (operator) => {
-
+        
         if (calculator.storedValue) {
-            calculator.showTotal();
+            calculator.displayValue = calculator.showTotal(calculator.displayValue);
         } else {
             calculator.storedValue = parseInt(calculator.displayValue);
         }
@@ -96,14 +92,13 @@ const calculator = {
             value = '';
         }
 
-        calculator.displayValue = calculator.displayValue + value;
+        calculator.displayValue = calculator.updateDisplay(calculator.displayValue + value);
 
-        calculator.updateDisplay()
     },
 
-    updateDisplay: () => {
+    updateDisplay: (value) => {
 
-        let value = String(calculator.displayValue);
+        value = String(value);
 
         if (!value || !value.length) {
             value = '0';
@@ -117,9 +112,9 @@ const calculator = {
             value = value.substring(0, 6);
         }
 
-        calculator.displayValue = value;
-
         calculator.emit('display-updated', String(value))
+
+        return value;
 
     }
 }
