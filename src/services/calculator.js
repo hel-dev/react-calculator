@@ -41,7 +41,14 @@ const calculator = {
 
                 break;
 
-            }
+            default:
+                break;
+
+        }
+
+        if (result > 9999999) {
+            result = 9999999;
+        }
 
         calculator.storedValue = result;
 
@@ -106,7 +113,7 @@ const calculator = {
             value = value.substring(0, 7);
         }
 
-        if((value.replace(/[^0-9]/g,"").length == 6 && value.slice(-1) == '.')) {
+        if((value.replace(/[^0-9]/g,"").length === 6 && value.slice(-1) === '.')) {
             value = value.substring(0, 6);
         }
 

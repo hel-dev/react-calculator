@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import calculator from 'services/calculator'
-import services from 'services'
 
 import './Key.css';
 
