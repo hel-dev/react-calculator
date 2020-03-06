@@ -94,9 +94,19 @@ const calculator = {
 
     updateDisplay: (value) => {
 
-        if (!value || calculator.displayValue.replace(/[^0-9]/g,"").length === 7 || !calculator.displayValue.length) {
+        if (!value || !value.length) {
             value = '0';
         }
+
+        if (value.replace(/[^0-9]/g,"").length >= 7) {
+            value = value.substring(0, 7);
+        }
+
+        if((value.replace(/[^0-9]/g,"").length == 6 && value.slice(-1) == '.')) {
+            value = value.substring(0, 6);
+        }
+
+        calculator.displayValue = value;
 
         calculator.emit('display-updated', String(value))
 
