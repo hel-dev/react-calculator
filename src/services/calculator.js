@@ -85,20 +85,16 @@ const calculator = {
             value = '';
         }
 
-        if (calculator.displayValue.replace(/[^0-9]/g,"").length === 7) {
-            value = '';
-        }
-
         calculator.displayValue = calculator.displayValue + value;
-
-        if (!calculator.displayValue.length) {
-            calculator.displayValue = '0';
-        }
 
         calculator.updateDisplay(calculator.displayValue)
     },
 
     updateDisplay: (value) => {
+
+        if (!value || calculator.displayValue.replace(/[^0-9]/g,"").length === 7 || !calculator.displayValue.length) {
+            value = '0';
+        }
 
         calculator.emit('display-updated', String(value))
 
