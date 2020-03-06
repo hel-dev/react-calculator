@@ -117,6 +117,8 @@ const calculator = {
             value = value.substring(0, 6);
         }
 
+        calculator.displayValue = value;
+
         calculator.emit('display-updated', String(value))
 
     }
