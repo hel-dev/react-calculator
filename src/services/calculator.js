@@ -10,7 +10,7 @@ const calculator = {
 
     calculate: (value) => {
 
-        let result = 0
+        let result = calculator.storedValue;
 
         switch (calculator.selectedOperator) {
 
@@ -37,19 +37,14 @@ const calculator = {
 
                 break;
 
-            default:
-
-                result = calculator.storedValue;
-
-                break;
-        }
+            }
 
         calculator.storedValue = result;
 
         return result;
     },
 
-    callOperator: () => {
+    showTotal: () => {
 
         calculator.updateDisplay(calculator.calculate(parseInt(calculator.displayValue)))
 
@@ -58,7 +53,7 @@ const calculator = {
     setOperator: (operator) => {
 
         if (calculator.storedValue) {
-            calculator.callOperator();
+            calculator.showTotal();
         } else {
             calculator.storedValue = parseInt(calculator.displayValue);
         }
