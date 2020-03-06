@@ -4,7 +4,10 @@ import { shallow, mount } from 'enzyme';
 import Calculator from './Calculator';
 import Display from '../Display/Display';
 import Keypad from '../Keypad/Keypad';
+import services from 'services';
 import calculator from 'services/calculator';
+
+services.initialize();
 
 describe('Calculator', () => {
   
@@ -82,7 +85,7 @@ describe('setNumber', () => {
 
     await act(async () => {
       calculator.setNumber('c');
-      calculator.setNumber('5');
+      calculator.setNumber('5', calculator.displayValue);
     })
     
     expect(wrapper.find('.display-container').text()).toEqual('5');
@@ -92,8 +95,8 @@ describe('setNumber', () => {
 
     await act(async () => {
       calculator.setNumber('c');
-      calculator.setNumber('5');
-      calculator.setNumber('0');
+      calculator.setNumber('5', calculator.displayValue);
+      calculator.setNumber('0', calculator.displayValue);
     });
 
     expect(wrapper.find('.display-container').text()).toEqual('50');
@@ -103,13 +106,13 @@ describe('setNumber', () => {
 
     await act(async () => {
       calculator.setNumber('c');
-      calculator.setNumber('0');
+      calculator.setNumber('0', calculator.displayValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0');
 
     await act(async () => {
-      calculator.setNumber('5');
+      calculator.setNumber('5', calculator.displayValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');
@@ -119,8 +122,8 @@ describe('setNumber', () => {
 
     await act(async () => {
       calculator.setNumber('c');
-      calculator.setNumber('0');
-      calculator.setNumber('0');
+      calculator.setNumber('0', calculator.displayValue);
+      calculator.setNumber('0', calculator.displayValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0');
@@ -129,9 +132,10 @@ describe('setNumber', () => {
   it('removes last char of displayValue', async () => {
 
     await act(async () => {
-      calculator.setNumber('5');
-      calculator.setNumber('0');
-      calculator.setNumber('ce');
+      calculator.setNumber('c');
+      calculator.setNumber('5', calculator.displayValue);
+      calculator.setNumber('0', calculator.displayValue);
+      calculator.setNumber('ce', calculator.displayValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');
@@ -141,8 +145,8 @@ describe('setNumber', () => {
 
     await act(async () => {
       calculator.setNumber('c');
-      calculator.setNumber('.');
-      calculator.setNumber('.');
+      calculator.setNumber('.', calculator.displayValue);
+      calculator.setNumber('.', calculator.displayValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('0.');
@@ -169,10 +173,10 @@ describe('showTotal', () => {
 
     await act(async () => {
       calculator.setNumber('c');
-      calculator.setNumber('3');
-      calculator.setOperator('+');
-      calculator.setNumber('2');
-      calculator.setOperator('=');
+      calculator.setNumber('3', calculator.displayValue);
+      calculator.setOperator('+', calculator.displayValue);
+      calculator.setNumber('2', calculator.displayValue);
+      calculator.setOperator('=', calculator.displayValue);
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');

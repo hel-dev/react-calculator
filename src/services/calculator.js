@@ -12,6 +12,18 @@ const calculator = {
 
     storedValue: 0,
 
+    initialize: () => {
+
+        calculator.on('display-updated', 
+
+            value => {
+                calculator.displayValue = value;
+            }
+
+        )
+        
+    },
+
     calculate: (value) => {
 
         let result = calculator.storedValue;
@@ -72,27 +84,27 @@ const calculator = {
         calculator.selectedOperator = operator;
     },
 
-    setNumber: (value) => {
+    setNumber: (value, displayValue) => {
 
-        if (calculator.displayValue === '0' && value !== '.') {
-            calculator.displayValue = '';
+        if (displayValue === '0' && value !== '.') {
+            displayValue = '';
         }
 
         if (value === 'c') {
-            calculator.displayValue = '';
+            displayValue = '';
             value = '0';
         }
 
         if (value === 'ce') {
-            calculator.displayValue = calculator.displayValue.substring(0, calculator.displayValue.length - 1);
+            displayValue = displayValue.substring(0, displayValue.length - 1);
             value = '';
         }
 
-        if (value === '.' && /\./.test(calculator.displayValue)) {
+        if (value === '.' && /\./.test(displayValue)) {
             value = '';
         }
 
-        calculator.displayValue = calculator.updateDisplay(calculator.displayValue + value);
+        calculator.updateDisplay(displayValue + value);
 
     },
 

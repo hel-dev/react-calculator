@@ -14,7 +14,9 @@ const Calculator = () => {
 
     calculator.on('display-updated', 
 
-      value => setDisplayValue(value)
+      value => {
+        setDisplayValue(value);
+      }
 
     )
 
