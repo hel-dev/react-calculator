@@ -30,11 +30,8 @@ describe('Calculator', () => {
     expect(wrapper.containsAllMatchingElements([
       <Display displayValue={displayValue} />,
       <Keypad
-        callOperator={callOperator}
         numbers={numbers}
         operators={operators}
-        setOperator={setOperator}
-        setNumber={setNumber}
       />
     ])).toEqual(true);
   });
@@ -64,9 +61,9 @@ describe('mounted Calculator', () => {
 
   });
 
-  it('calls callOperator when the submit key is clicked', () => {
+  it('calls showTotal when the submit key is clicked', () => {
 
-    const spy = jest.spyOn(calculator, 'callOperator');
+    const spy = jest.spyOn(calculator, 'showTotal');
     expect(spy).toHaveBeenCalledTimes(0);
     wrapper.find('.submit-key').simulate('click');
     expect(spy).toHaveBeenCalledTimes(1);
@@ -162,7 +159,7 @@ describe('setNumber', () => {
 
 });
 
-describe('callOperator', () => {
+describe('showTotal', () => {
 
   let wrapper;
 
@@ -175,7 +172,7 @@ describe('callOperator', () => {
       calculator.setNumber('3');
       calculator.setOperator('+');
       calculator.setNumber('2');
-      calculator.callOperator();
+      calculator.showTotal();
     })
 
     expect(wrapper.find('.display-container').text()).toEqual('5');

@@ -9,11 +9,8 @@ describe('Keypad', () => {
   beforeEach(() => {
     wrapper = shallow(
       <Keypad
-        callOperator={jest.fn()}
         numbers={[]}
         operators={[]}
-        setOperator={jest.fn()}
-        updateDisplay={jest.fn()}
       />
     );
   });
