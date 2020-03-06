@@ -25,7 +25,7 @@ describe('Calculator', () => {
 
     const { displayValue } = displayComponent.find(Display).props();
 
-    const { numbers, operators, callOperator, setOperator, setNumber } = keypadComponent.find(Keypad).props();
+    const { numbers, operators } = keypadComponent.find(Keypad).props();
 
     expect(wrapper.containsAllMatchingElements([
       <Display displayValue={displayValue} />,
