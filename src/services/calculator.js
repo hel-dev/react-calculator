@@ -189,11 +189,11 @@ const calculator = {
             value = '0';
         }
 
-        if (value.replace(/[^0-9]/g,"").length >= maxDigits) {
+        if (_s(value).hasReachedMaxDigits(maxDigits)) {
             value = value.substring(0, maxDigits + (/\./.test(value)?1:0));
         }
 
-        if (value.replace(/[^0-9]/g,"").length === maxDigits && _s(value).hasATrailingDot()) {
+        if (_s(value).hasReachedMaxDigits(maxDigits) && _s(value).hasATrailingDot()) {
             value = value.substring(0, maxDigits);
         }
 
