@@ -183,12 +183,12 @@ const calculator = {
         if (!value || !value.length) {
             value = '0';
         }
-
+        
         if (value.replace(/[^0-9]/g,"").length >= maxDigits) {
-            value = value.substring(0, maxDigits);
+            value = value.substring(0, maxDigits + (/\./.test(value)?1:0));
         }
 
-        if((value.replace(/[^0-9]/g,"").length === maxDigits - 1 && value.slice(-1) === '.')) {
+        if (value.replace(/[^0-9]/g,"").length === maxDigits - 1 && value.slice(-1) === '.') {
             value = value.substring(0, maxDigits - 1);
         }
 
