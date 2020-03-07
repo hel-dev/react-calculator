@@ -6,6 +6,8 @@ const calculator = {
 
     numbers: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0','ce'],
 
+    maxDigits: 7,
+
     displayValue_: '0',
 
     set displayValue (value) {
@@ -85,6 +87,7 @@ const calculator = {
 
     calculate: (value, storedValue, selectedOperator) => {
 
+        const { maxDigits } = calculator; 
         let result = storedValue;
 
         switch (selectedOperator) {
@@ -117,8 +120,8 @@ const calculator = {
 
         }
 
-        if (result > 9999999) {
-            result = 9999999;
+        if (result > Math.pow(10, maxDigits) - 1) {
+            result = Math.pow(10, maxDigits) - 1;
         }
 
         calculator.emit('calculation-made', result)
@@ -174,18 +177,19 @@ const calculator = {
 
     updateDisplay: (value) => {
 
+        const { maxDigits } = calculator; 
         value = String(value);
 
         if (!value || !value.length) {
             value = '0';
         }
 
-        if (value.replace(/[^0-9]/g,"").length >= 7) {
-            value = value.substring(0, 7);
+        if (value.replace(/[^0-9]/g,"").length >= maxDigits) {
+            value = value.substring(0, maxDigits);
         }
 
-        if((value.replace(/[^0-9]/g,"").length === 6 && value.slice(-1) === '.')) {
-            value = value.substring(0, 6);
+        if((value.replace(/[^0-9]/g,"").length === maxDigits - 1 && value.slice(-1) === '.')) {
+            value = value.substring(0, maxDigits - 1);
         }
 
         calculator.emit('display-updated', String(value))
