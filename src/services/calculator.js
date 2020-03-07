@@ -1,4 +1,5 @@
 import { withEventEmitter } from 'helpers/events';
+import { _s } from 'helpers/string';
 
 const calculator = {
 
@@ -192,8 +193,8 @@ const calculator = {
             value = value.substring(0, maxDigits + (/\./.test(value)?1:0));
         }
 
-        if (value.replace(/[^0-9]/g,"").length === maxDigits - 1 && value.slice(-1) === '.') {
-            value = value.substring(0, maxDigits - 1);
+        if (value.replace(/[^0-9]/g,"").length === maxDigits && _s(value).hasATrailingDot()) {
+            value = value.substring(0, maxDigits);
         }
 
         calculator.emit('display-updated', String(value))
