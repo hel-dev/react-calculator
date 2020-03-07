@@ -120,6 +120,10 @@ const calculator = {
 
         }
 
+        if (String(result) === 'Infinity' || String(result) === 'NaN') {
+            result = 0;
+        }
+
         if (result > Math.pow(10, maxDigits) - 1) {
             result = Math.pow(10, maxDigits) - 1;
         }
@@ -183,7 +187,7 @@ const calculator = {
         if (!value || !value.length) {
             value = '0';
         }
-        
+
         if (value.replace(/[^0-9]/g,"").length >= maxDigits) {
             value = value.substring(0, maxDigits + (/\./.test(value)?1:0));
         }
